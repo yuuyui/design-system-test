@@ -1,9 +1,35 @@
-display: inline-flex;
-padding-bottom: var(--spacing-1, 4px);
-justify-content: center;
-align-items: center;
-gap: var(--spacing-2, 8px);
+import React from 'react';
+import './Button.css';
 
-border-radius: var(--radius-xl, 12px);
-opacity: var(--opacity-100, 1);
-background: var(--btn-bg-btn2-connect-2, #7E57C2);
+/**
+ * Button Component
+ * Variants: primary, secondary, pill, outline
+ * Sizes: sm, md, lg
+ */
+export const Button = ({
+  children,
+  variant = 'primary',
+  size = 'md',
+  disabled = false,
+  onClick,
+  className = '',
+  ...props
+}) => {
+  const baseClass = 'btn';
+  const variantClass = `btn--${variant}`;
+  const sizeClass = `btn--${size}`;
+  const disabledClass = disabled ? 'btn--disabled' : '';
+  
+  return (
+    <button
+      className={`${baseClass} ${variantClass} ${sizeClass} ${disabledClass} ${className}`}
+      disabled={disabled}
+      onClick={onClick}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+};
+
+export default Button;
